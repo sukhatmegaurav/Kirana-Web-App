@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<head>
+	<title>Kirana Store</title>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js')}}"></script>
+	<link rel="stylesheet" href="{{ url_for('static',     filename='css/mainLayout.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+</head>
+<body>
+<header>
+  <div class="container">
+    <nav class="navbar navbar-expand bg-info navbar-dark fixed-top">
+            <div class="container-fluid">
+                <div class="nav-brand" style="align-items: center;justify-content: center;display: flex;">
+                    <img src="/static/css/images/kiranastore.jpg" width="40" height="40" class="d-inline-block align-top rounded" alt="">
+                    <a class="text-white">&nbsp;&nbsp;Apni Dukan&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                </div>
+
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('BillingPage') }}">Billing Page link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('Employees') }}">Example</a>
+                    </li>
+                </ul>
+                <!-- <div class="">
+                    $if session['user'] == None:
+                        <div class="">
+                            <a href="/userLogin" class="btn btn-success">Sign In</a>
+                            <a href="/register" class="btn btn-raised btn-dark">Register</a>&nbsp;&nbsp;
+                        </div>
+                    $else:
+                        <strong class="text-white">signed in as <u>$session['user']['username']</u></strong>
+                        <a id="userLogout" class="btn btn-dark">Sign Out</a>
+                </div> -->
+
+            </div>
+        </nav>
+  </div>
+</header>
+<div class="main">
+    {% block content %}
+    {% endblock %}
+</div>
+<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/gvsScript.js') }}"></script>
+</body>
+</html>
