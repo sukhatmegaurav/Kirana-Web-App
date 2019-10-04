@@ -1,4 +1,9 @@
-def gvs():
+detection_graph=''
+label_map=''
+categories=''
+category_index=''
+sess=''
+def gvs(PATH_TO_IMAGE):
     ######## Image Object Detection Using Tensorflow-trained Classifier #########
     #
     # Author: Evan Juras
@@ -32,7 +37,7 @@ def gvs():
 
     # Name of the directory containing the object detection module we're using
     MODEL_NAME = 'inference_graph'
-    IMAGE_NAME = 'test8.jpg'
+    # IMAGE_NAME = 'test12.jpg'
 
     # Grab path to current working directory
     CWD_PATH = os.getcwd()
@@ -42,23 +47,27 @@ def gvs():
     PATH_TO_CKPT = os.path.join(CWD_PATH,MODEL_NAME,'frozen_inference_graph20000.pb')
 
     # Path to label map file
-    PATH_TO_LABELS = os.path.join(CWD_PATH,'training','labelmap1.pbtxt')
+    PATH_TO_LABELS = os.path.join(CWD_PATH,'training','labelmap_collab4_10.pbtxt')
 
     # Path to image
-    PATH_TO_IMAGE = os.path.join(CWD_PATH,IMAGE_NAME)
+    # PATH_TO_IMAGE = os.path.join(CWD_PATH,IMAGE_NAME)
 
     # Number of classes the object detector can identify
-    NUM_CLASSES = 30
+    NUM_CLASSES = 35
 
     # Load the label map.
     # Label maps map indices to category names, so that when our convolution
     # network predicts `5`, we know that this corresponds to `king`.
     # Here we use internal utility functions, but anything that returns a
     # dictionary mapping integers to appropriate string labels would be fine
+    global category_index
+    global label_map
+    global categories
     label_map = label_map_util.load_labelmap(PATH_TO_LABELS)
     categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
     category_index = label_map_util.create_category_index(categories)
 
+    global detection_graph
     # Load the Tensorflow model into memory.
     detection_graph = tf.Graph()
     with detection_graph.as_default():
@@ -68,7 +77,19 @@ def gvs():
             od_graph_def.ParseFromString(serialized_graph)
             tf.import_graph_def(od_graph_def, name='')
 
+        global sess
         sess = tf.Session(graph=detection_graph)
+    gvs2(PATH_TO_IMAGE)
+
+def gvs2(PATH_TO_IMAGE):
+    # Import packages
+    import os
+    import cv2
+    import numpy as np
+    import sys
+    # Import utilites
+    from utils import label_map_util
+    from utils import visualization_utils as vis_util
 
     # Define input and output tensors (i.e. data) for the object detection classifier
 
@@ -97,8 +118,52 @@ def gvs():
     (boxes, scores, classes, num) = sess.run(
         [detection_boxes, detection_scores, detection_classes, num_detections],
         feed_dict={image_tensor: image_expanded})
-    print(detection_scores[0])
-    print(detection_classes)
+    
+    #gvs works here
+
+    # print("category_index")
+    # print(category_index)
+    # print(type(category_index))
+    # print(category_index[22])
+    # print("category_index")
+
+    # print("classes")
+    # print(detection_classes)
+    # print(type(detection_classes))
+    # print(list(classes[0]))
+    # print(type(classes[0]))
+    # print("classes")
+
+    # print("scores")
+    # print(scores)
+    # print(type(scores))
+    # print(list(scores[0]))
+    # print(type(scores[0]))
+    # print("scores")
+    
+    #gvs works here
+
+    lister =[]
+    import csv
+    final_score = np.squeeze(scores)    
+    count = 0
+    for i in range(100):
+        if scores is None or final_score[i] > 0.6:
+                count = count + 1
+    print('Detected Product :',count)
+    printcount =0;
+    for i in classes[0]:
+          printcount = printcount +1
+          print(category_index[i]['name'])
+          with open('product_list.csv', mode='a') as product_file:
+                product_writer = csv.writer(product_file)
+                lister.append(category_index[i]['name'])
+                product_writer.writerow(lister)
+          if(printcount == count):
+                break
+
+    
+
     # Draw the results of the detection (aka 'visulaize the results')
 
     vis_util.visualize_boxes_and_labels_on_image_array(
@@ -108,7 +173,7 @@ def gvs():
         np.squeeze(scores),
         category_index,
         use_normalized_coordinates=True,
-        line_thickness=8,
+        line_thickness=3,
         min_score_thresh=0.60)
 
     # All the results have been drawn on image. Now display the image.
@@ -119,3 +184,4 @@ def gvs():
 
     # Clean up
     cv2.destroyAllWindows()
+    print(lister)

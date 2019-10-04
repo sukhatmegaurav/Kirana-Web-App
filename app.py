@@ -1,11 +1,12 @@
 import os
-from flask import Flask, request,render_template,send_from_directory
+from flask import Flask,request,render_template,send_from_directory,redirect
 from flask_restful import Resource, Api
 from flask_jsonpify import jsonify
 from Object_detection_image import *
 
 app = Flask(__name__)
 api = Api(app)
+cnt=0
 
 @app.route('/favicon.ico') 
 def favicon(): 
@@ -15,19 +16,38 @@ def favicon():
 def home():
     return render_template('mainLayout.html')
 
-@app.route('/billingpage')
+@app.route('/generate-bill-page')
 def BillingPage():
     return render_template('billingPage.html') 
 
 # background process happening without any refreshing
 @app.route('/camscan')
 def CamScan():
-    gvs()
-    return "nothing"
+	from os import listdir
+	CWD_PATH = os.getcwd()
+	img_dir_path=os.path.join(CWD_PATH,"test")
 
-@app.route('/employees')
-def Employees():
-    return {'employees': [{'id':1, 'name':'Balram'},{'id':2, 'name':'Tom'}]} 
+	#empty the contents in the last bill
+	open('product_list.csv', 'w').close()
+	
+	image_list=listdir(img_dir_path)
+	load_images=[]
+	for image in image_list:
+		global cnt
+		if cnt==0:
+			PATH_TO_IMAGE=os.path.join(img_dir_path,image)
+			gvs(PATH_TO_IMAGE)
+			cnt+=1
+		else:
+			PATH_TO_IMAGE=os.path.join(img_dir_path,image)
+			gvs2(PATH_TO_IMAGE)
+	
+	return redirect('/show-bill')
+
+@app.route('/show-bill')
+def ShowBill():
+	
+    return render_template('showBillPage.html') 
 
 @app.route('/gvs')
 def Gvs():

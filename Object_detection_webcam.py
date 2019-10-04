@@ -40,13 +40,13 @@ def gvs():
 
 	# Path to frozen detection graph .pb file, which contains the model that is used
 	# for object detection.
-	PATH_TO_CKPT = os.path.join(CWD_PATH,MODEL_NAME,'frozen_inference_graph20000.pb')
+	PATH_TO_CKPT = os.path.join(CWD_PATH,MODEL_NAME,'v4frozen_inference_graph.pb')
 
 	# Path to label map file
-	PATH_TO_LABELS = os.path.join(CWD_PATH,'training','labelmap1.pbtxt')
+	PATH_TO_LABELS = os.path.join(CWD_PATH,'training','label_map.pbtxt')
 
 	# Number of classes the object detector can identify
-	NUM_CLASSES = 2
+	NUM_CLASSES = 30
 
 	## Load the label map.
 	# Label maps map indices to category names, so that when our convolution
