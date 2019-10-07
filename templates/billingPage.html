@@ -2,12 +2,27 @@
 <html>
 <head>
 	<title>Billing Page</title>
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/billingPage.css') }}">
 </head>
-<body><br><br><br>
+<body>
+	<br><br><br><br>
 	{% extends "mainLayout.html" %}
 	{% block content %}
-	<h2>bill bna skte idhar</h2>
-	<a role="button" class='btn btn-info' href="{{ url_for('CamScan') }}">start scan</a>
+	<article>
+		<form method="post" enctype="multipart/form-data" id="uProductImg">
+			<button type="submit" class='btn btn-lg btn-info' >Generate Bill</button>
+			
+			<br><br><br>
+		    <label for="files">Select product images: </label>
+		    <input id="files" type="file" multiple="multiple" accept="jpg*;capture=camera" name="file[]"/>
+		    <button type="button" id="clear">Clear selection</button>
+		</form>
+	   
+	    <hr>
+        
+        <output id="result" />
+    </article>
+	
 	{% endblock %}
 </body>
 </html>

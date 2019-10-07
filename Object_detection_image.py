@@ -1,14 +1,54 @@
+product_details={
+    1: {'id': 1, 'name': 'coke-1.5l', 'price': 72},
+    2: {'id': 2, 'name': 'coke-700ml', 'price': 79},
+    3: {'id': 3, 'name': 'coke-bottle-2l', 'price': 89},
+    4: {'id': 4, 'name': 'coke-bottle-2l-zero', 'price': 101},
+    5: {'id': 5, 'name': 'coke-bottle-2ll', 'price': 120},
+    6: {'id': 6, 'name': 'coke-bottle-300ml', 'price': 30},
+    7: {'id': 7, 'name': 'coke-bottle-700ml', 'price': 40},
+    8: {'id': 8, 'name': 'coke-can', 'price': 15},
+    9: {'id': 9, 'name': 'coke-can-classic', 'price': 10},
+    10: {'id': 10, 'name': 'coke-can-diet', 'price': 25},
+    11: {'id': 11, 'name': 'coke-can-energy', 'price': 25},
+    12: {'id': 12, 'name': 'coke-can-espresso', 'price': 26},
+    13: {'id': 13, 'name': 'coke-can-orange', 'price': 20},
+    14: {'id': 14, 'name': 'coke-can-zero', 'price': 29},
+    15: {'id': 15, 'name': 'coke-glass', 'price': 10},
+    16: {'id': 16, 'name': 'coke-glass-diet', 'price': 15},
+    17: {'id': 17, 'name': 'coke-light-bottle-300ml', 'price': 30},
+    18: {'id': 18, 'name': 'coke-zero-bottle-2l', 'price': 101},
+    19: {'id': 19, 'name': 'coke-zero-bottle-700ml', 'price': 40},
+    20: {'id': 20, 'name': 'gooday-large', 'price': 150},
+    21: {'id': 21, 'name': 'gooday-medium', 'price': 60},
+    22: {'id': 22, 'name': 'gooday-mediuml-choco', 'price': 70},
+    23: {'id': 23, 'name': 'gooday-small', 'price': 20},
+    24: {'id': 24, 'name': 'gooday-small-5', 'price': 5},
+    25: {'id': 25, 'name': 'gooday-small-butter', 'price': 10},
+    26: {'id': 26, 'name': 'gooday-small-choco', 'price': 10},
+    27: {'id': 27, 'name': 'lays-large', 'price': 40},
+    28: {'id': 28, 'name': 'lays-med', 'price': 20},
+    29: {'id': 29, 'name': 'lays-small', 'price': 10},
+    30: {'id': 30, 'name': 'lays-small-5', 'price': 5},
+    31: {'id': 31, 'name': 'pepsi-can', 'price': 15},
+    32: {'id': 32, 'name': 'pepsi-can-0', 'price': 20},
+    33: {'id': 33, 'name': 'pepsi-can-pack-2', 'price': 40},
+    34: {'id': 34, 'name': 'sprite-can', 'price': 15},
+    35: {'id': 35, 'name': 'thumbsup-glass', 'price': 10}
+}
+
+
 detection_graph=''
 label_map=''
 categories=''
 category_index=''
 sess=''
+
 def gvs(PATH_TO_IMAGE):
     ######## Image Object Detection Using Tensorflow-trained Classifier #########
     #
     # Author: Evan Juras
     # Date: 1/15/18
-    # Description: 
+    # Description:
     # This program uses a TensorFlow-trained classifier to perform object detection.
     # It loads the classifier uses it to perform object detection on an image.
     # It draws boxes and scores around the objects of interest in the image.
@@ -79,7 +119,7 @@ def gvs(PATH_TO_IMAGE):
 
         global sess
         sess = tf.Session(graph=detection_graph)
-    gvs2(PATH_TO_IMAGE)
+    return gvs2(PATH_TO_IMAGE)
 
 def gvs2(PATH_TO_IMAGE):
     # Import packages
@@ -118,7 +158,7 @@ def gvs2(PATH_TO_IMAGE):
     (boxes, scores, classes, num) = sess.run(
         [detection_boxes, detection_scores, detection_classes, num_detections],
         feed_dict={image_tensor: image_expanded})
-    
+
     #gvs works here
 
     # print("category_index")
@@ -140,48 +180,52 @@ def gvs2(PATH_TO_IMAGE):
     # print(list(scores[0]))
     # print(type(scores[0]))
     # print("scores")
-    
+
     #gvs works here
 
-    lister =[]
+
     import csv
-    final_score = np.squeeze(scores)    
+    final_score = np.squeeze(scores)
     count = 0
     for i in range(100):
         if scores is None or final_score[i] > 0.6:
                 count = count + 1
     print('Detected Product :',count)
     printcount =0;
-    for i in classes[0]:
-          printcount = printcount +1
-          print(category_index[i]['name'])
-          with open('product_list.csv', mode='a') as product_file:
-                product_writer = csv.writer(product_file)
-                lister.append(category_index[i]['name'])
-                product_writer.writerow(lister)
-          if(printcount == count):
+    lister =[]
+    if count!=0:
+        for i in classes[0]:
+            if(printcount == count):
                 break
+            printcount = printcount +1
+            with open('product_list.csv', mode='a',newline='') as product_file:
+                product_writer = csv.writer(product_file)
+                lister.append(category_index[i]['id'])
+                product_writer.writerow(lister)
+        return 1
+    else:
+        return PATH_TO_IMAGE
 
-    
+
 
     # Draw the results of the detection (aka 'visulaize the results')
 
-    vis_util.visualize_boxes_and_labels_on_image_array(
-        image,
-        np.squeeze(boxes),
-        np.squeeze(classes).astype(np.int32),
-        np.squeeze(scores),
-        category_index,
-        use_normalized_coordinates=True,
-        line_thickness=3,
-        min_score_thresh=0.60)
+    # vis_util.visualize_boxes_and_labels_on_image_array(
+    #     image,
+    #     np.squeeze(boxes),
+    #     np.squeeze(classes).astype(np.int32),
+    #     np.squeeze(scores),
+    #     category_index,
+    #     use_normalized_coordinates=True,
+    #     line_thickness=3,
+    #     min_score_thresh=0.60)
 
-    # All the results have been drawn on image. Now display the image.
-    cv2.imshow('Object detector', image)
+    # # All the results have been drawn on image. Now display the image.
+    # cv2.imshow('Object detector', image)
 
-    # Press any key to close the image
-    cv2.waitKey(0)
+    # # Press any key to close the image
+    # cv2.waitKey(0)
 
-    # Clean up
-    cv2.destroyAllWindows()
-    print(lister)
+    # # Clean up
+    # cv2.destroyAllWindows()
+    # print(lister)

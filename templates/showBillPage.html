@@ -3,10 +3,106 @@
 <head>
 	<title>Show Bill</title>
 </head>
-<body><br><br><br>
+<body><br><br>
 	{% extends "mainLayout.html" %}
 	{% block content %}
-	<h2>Bill Dikhana hai idhar pe</h2>
+	<div id="invoice">
+        <div class="toolbar hidden-print">
+            <div class="text-right">
+                <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+                <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
+            </div>
+            <hr>
+        </div>
+        <div class="invoice overflow-auto">
+            <div style="min-width: 600px">
+                <header>
+                    <div class="row">
+                        <div class="col">
+                            <a target="_blank" href="">
+                                <img src="/static/css/images/kiranastore.jpg" data-holder-rendered="true" width="40" height="40" class="d-inline-block align-top rounded"/>
+                                </a>
+                                <h3>The Kirana Store</h3>
+                        </div>
+                        <div class="col company-details">
+                            <h2 class="name">
+                                <a target="_blank" href="">
+                                Apni Dukan
+                                </a>
+                            </h2>
+                            <div>455 Foggy Heights, Mumbai 85004, India</div>
+                            <div>(123) 456-789</div>
+                            <div>kiranastore@gmail.com</div>
+                        </div>
+                    </div>
+                </header>
+                <main>
+                    <div class="row contacts">
+                        <div class="col invoice-to">
+                            <div class="text-gray-light">INVOICE TO:</div>
+                            <h2 class="to">Guest</h2>
+                        </div>
+                        <div class="col invoice-details">
+                            <h1 class="invoice-id">INVOICE {{ invoice_id }}</h1>
+                            <div class="date">Date of Invoice: {{ timestamp }}</div>
+                        </div>
+                    </div>
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+                            	<th class="unit">#</th>
+                                <th width="80">PRODUCT ID</th>
+                                <th class="text-left">PRODUCT NAME</th>
+                                <th class="price">PRICE</th>
+                                <th class="unit">QUANTITY</th>
+                                <th class="total">TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for key,value in cart.items() %}
+                            <tr>
+                            	<td id="gvs" class="unit"></td>
+                                <td class="no">{{ key }}</td>
+                                <td class="text-left"><h3>{{ value['name'] }}</h3></td>
+                                <td class="price">₹{{ value['price'] }}</td>
+                                <td class="unit">x{{ value['qty'] }}</td>
+                                <td class="total">₹{{ value['price']*value['qty'] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td colspan="2">SUBTOTAL</td>
+                                <td>₹{{ costs['cost_wo_gst'] }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td colspan="2">GST 5%</td>
+                                <td>₹{{ costs['gst_amt'] }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td colspan="2">GRAND TOTAL</td>
+                                <td>₹{{ costs['cost_w_gst'] }}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div class="thanks">Thank you!</div>
+                    <div class="notices">
+                        <div>NOTICE:</div>
+                        <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+                    </div>
+                </main>
+                <footer>
+                    Invoice was created on a computer and is valid without the signature and seal.
+                </footer>
+            </div>
+            <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+            <div></div>
+        </div>
+    </div>
+
 	{% endblock %}
 </body>
 </html>
