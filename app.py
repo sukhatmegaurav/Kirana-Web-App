@@ -24,10 +24,6 @@ def favicon():
 def home():
 	return render_template('mainLayout.html')
 
-# @app.route('/generate-bill-page', methods=['GET'])
-# def BillingPage():
-#     return render_template('billingPage.html')
-
 # background process happening without any refreshing
 @app.route('/camscan')
 def CamScan():
@@ -86,7 +82,7 @@ def ShowBill():
 	for key,value in items_freq.items():
 		tempy=product_details[key]
 		tempy['qty']=value
-		total_price+=tempy['price']
+		total_price+=tempy['price']*value
 		cart[key]=tempy
 
 	costs={}

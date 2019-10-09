@@ -1,0 +1,229 @@
+item {
+    id: 1
+    name: 'Britania-toast-large'
+}
+
+item {
+    id: 2
+    name: 'Britania-toast-med'
+}
+
+item {
+    id: 3
+    name: 'Britania-toast-small'
+}
+
+item {
+    id: 4
+    name: 'coke-1.5l'
+}
+
+item {
+    id: 5
+    name: 'coke-700ml'
+}
+
+item {
+    id: 6
+    name: 'coke-bottle-2l'
+}
+
+item {
+    id: 7
+    name: 'coke-bottle-300ml'
+}
+
+item {
+    id: 8
+    name: 'coke-bottle-700ml'
+}
+
+item {
+    id: 9
+    name: 'coke-can'
+}
+
+item {
+    id: 10
+    name: 'coke-can-diet'
+}
+
+item {
+    id: 11
+    name: 'coke-can-energy'
+}
+
+item {
+    id: 12
+    name: 'coke-can-espresso'
+}
+
+item {
+    id: 13
+    name: 'coke-can-orange'
+}
+
+item {
+    id: 14
+    name: 'coke-can-zero'
+}
+
+item {
+    id: 15
+    name: 'coke-diet/zero-bottle-700ml'
+}
+
+item {
+    id: 16
+    name: 'coke-glass-bottle'
+}
+
+item {
+    id: 17
+    name: 'colgate-Plax'
+}
+
+item {
+    id: 18
+    name: 'colgate-family'
+}
+
+item {
+    id: 19
+    name: 'colgate-medium'
+}
+
+item {
+    id: 20
+    name: 'colgate-small'
+}
+
+item {
+    id: 21
+    name: 'colgate-total-150gm'
+}
+
+item {
+    id: 22
+    name: 'gooday-large'
+}
+
+item {
+    id: 23
+    name: 'gooday-medium'
+}
+
+item {
+    id: 24
+    name: 'gooday-medium-choco'
+}
+
+item {
+    id: 25
+    name: 'gooday-small'
+}
+
+item {
+    id: 26
+    name: 'gooday-small-butter'
+}
+
+item {
+    id: 27
+    name: 'gooday-small-choco'
+}
+
+item {
+    id: 28
+    name: 'lays-large'
+}
+
+item {
+    id: 29
+    name: 'lays-med'
+}
+
+item {
+    id: 30
+    name: 'lays-small'
+}
+
+item {
+    id: 31
+    name: 'lays-small-5'
+}
+
+item {
+    id: 32
+    name: 'maggi-family'
+}
+
+item {
+    id: 33
+    name: 'maggi-small'
+}
+
+item {
+    id: 34
+    name: 'nescafe-caffe'
+}
+
+item {
+    id: 35
+    name: 'nescafe-can'
+}
+
+item {
+    id: 36
+    name: 'nescafe-cappe'
+}
+
+item {
+    id: 37
+    name: 'nescafe-cappe-big'
+}
+
+item {
+    id: 38
+    name: 'nescafe-cappe-med'
+}
+
+item {
+    id: 39
+    name: 'nescafe-classic/gold-big'
+}
+
+item {
+    id: 40
+    name: 'nescafe-classic/gold-med'
+}
+
+item {
+    id: 41
+    name: 'nescafe-classic/gold-small'
+}
+
+item {
+    id: 42
+    name: 'nescafe-dolce'
+}
+
+item {
+    id: 43
+    name: 'nescafe-dolce-big'
+}
+
+item {
+    id: 44
+    name: 'nescafe-mug'
+}
+
+item {
+    id: 45
+    name: 'pepsi-can'
+}
+
+item {
+    id: 46
+    name: 'toothbrush'
+}
