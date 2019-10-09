@@ -1,5 +1,5 @@
 import os
-from flask import Flask,request,render_template,send_from_directory,redirect
+from flask import Flask,request,render_template,send_from_directory,redirect,flash
 from flask_restful import Resource, Api
 from flask_jsonpify import jsonify
 from Object_detection_image import *
@@ -104,6 +104,7 @@ def ShowBill():
 @app.route('/generate-bill-page', methods=['GET','POST'])
 def BillingPage():
 	if request.method == 'POST':
+
 		#empty current_cart folder
 		import glob
 		files = glob.glob(os.getcwd() + '/current_cart/*')
@@ -114,8 +115,12 @@ def BillingPage():
 		for f in file_obj:
 			# file = request.files.get(f)
 			file = f
-			filename = photos.save(file,name=file.filename)
-		return redirect('camscan')
+			if file.filename is not '':
+				filename = photos.save(file,name=file.filename)
+				return redirect('camscan')
+			else:
+				flash('Select/upload atleast 1 product image to continue.')
+				return render_template('billingPage.html')
 	else:
 		return render_template('billingPage.html')
 
@@ -125,13 +130,8 @@ def Error():
 	global detected
 	return render_template('errorPage.html', errorImage=detected)
 
-@app.route('/gvs')
-def Gvs():
-	return "Fuck world!!"
-
-# api.add_resource(Employees, '/employees') # Route_1
-# api.add_resource(Gvs, '/gvs') # Route_2
-# api.add_resource(BillingPage, '/billingpage')
 
 if __name__ == '__main__':
-	 app.run(port=5002,debug=True)
+	app.secret_key = 'super secret key'
+	app.config['SESSION_TYPE'] = 'filesystem'
+	app.run(port=5002,debug=True)

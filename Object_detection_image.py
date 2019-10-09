@@ -437,31 +437,6 @@ def gvs2(PATH_TO_IMAGE):
         [detection_boxes, detection_scores, detection_classes, num_detections],
         feed_dict={image_tensor: image_expanded})
 
-    #gvs works here
-
-    # print("category_index")
-    # print(category_index)
-    # print(type(category_index))
-    # print(category_index[22])
-    # print("category_index")
-
-    # print("classes")
-    # print(detection_classes)
-    # print(type(detection_classes))
-    # print(list(classes[0]))
-    # print(type(classes[0]))
-    # print("classes")
-
-    # print("scores")
-    # print(scores)
-    # print(type(scores))
-    # print(list(scores[0]))
-    # print(type(scores[0]))
-    # print("scores")
-
-    #gvs works here
-
-
     import csv
     final_score = np.squeeze(scores)
     count = 0
@@ -505,6 +480,3 @@ def gvs2(PATH_TO_IMAGE):
     else:
         return PATH_TO_IMAGE
 
-
-
-    # print(lister)
