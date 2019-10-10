@@ -1,5 +1,5 @@
 import os
-from flask import Flask,request,render_template,send_from_directory,redirect,flash
+from flask import Flask,request,render_template,send_from_directory,redirect,flash,Markup
 from flask_restful import Resource, Api
 from flask_jsonpify import jsonify
 from Object_detection_image import *
@@ -22,7 +22,7 @@ def favicon():
 
 @app.route('/')
 def home():
-	return render_template('mainLayout.html')
+	return redirect('generate-bill-page')
 
 # background process happening without any refreshing
 @app.route('/camscan')
@@ -35,10 +35,9 @@ def CamScan():
 	open('product_list.csv', 'w').close()
 
 	image_list=listdir(img_dir_path)
-	load_images=[]
+	not_detected=[]
 	for image in image_list:
-		global cnt
-		global detected
+		global cnt,detected
 		if cnt==0:
 			PATH_TO_IMAGE=os.path.join(img_dir_path,image)
 
@@ -46,15 +45,26 @@ def CamScan():
 			cnt+=1
 			if detected != 1:
 				detected=image
-				return redirect('/error')
+				not_detected.append(image)
 		else:
 			PATH_TO_IMAGE=os.path.join(img_dir_path,image)
 			detected=gvs2(PATH_TO_IMAGE)
 			if detected!=1:
 				detected=image
-				return redirect('/error')
+				not_detected.append(image)
+	if len(not_detected)!=0:
+		not_detected_products=''
+		for product in not_detected:
+			not_detected_products+=str(product)+","
+
+		flash("Could not detect image: "
+		  +not_detected_products
+		  +Markup(r"<a href='/show-bill'>click here</a>")
+		  +" to generate bill without it or generate new bill with new images")
+		return redirect('/generate-bill-page')
 
 	return redirect('/show-bill')
+
 
 @app.route('/show-bill')
 def ShowBill():
@@ -117,10 +127,10 @@ def BillingPage():
 			file = f
 			if file.filename is not '':
 				filename = photos.save(file,name=file.filename)
-				return redirect('camscan')
 			else:
 				flash('Select/upload atleast 1 product image to continue.')
 				return render_template('billingPage.html')
+		return redirect('camscan')
 	else:
 		return render_template('billingPage.html')
 
@@ -129,6 +139,7 @@ def BillingPage():
 def Error():
 	global detected
 	return render_template('errorPage.html', errorImage=detected)
+
 
 
 if __name__ == '__main__':

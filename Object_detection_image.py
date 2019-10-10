@@ -437,6 +437,7 @@ def gvs2(PATH_TO_IMAGE):
         [detection_boxes, detection_scores, detection_classes, num_detections],
         feed_dict={image_tensor: image_expanded})
 
+
     import csv
     final_score = np.squeeze(scores)
     count = 0
@@ -449,24 +450,24 @@ def gvs2(PATH_TO_IMAGE):
     if count!=0:
         # Draw the results of the detection (aka 'visulaize the results')
 
-        vis_util.visualize_boxes_and_labels_on_image_array(
-            image,
-            np.squeeze(boxes),
-            np.squeeze(classes).astype(np.int32),
-            np.squeeze(scores),
-            category_index,
-            use_normalized_coordinates=True,
-            line_thickness=3,
-            min_score_thresh=0.60)
+        # vis_util.visualize_boxes_and_labels_on_image_array(
+        #     image,
+        #     np.squeeze(boxes),
+        #     np.squeeze(classes).astype(np.int32),
+        #     np.squeeze(scores),
+        #     category_index,
+        #     use_normalized_coordinates=True,
+        #     line_thickness=3,
+        #     min_score_thresh=0.60)
 
-        # # All the results have been drawn on image. Now display the image.
-        cv2.imshow('Object detector', image)
+        # # # All the results have been drawn on image. Now display the image.
+        # cv2.imshow('Object detector', image)
 
-        # # Press any key to close the image
-        cv2.waitKey(0)
+        # # # Press any key to close the image
+        # cv2.waitKey(0)
 
-        # # Clean up
-        cv2.destroyAllWindows()
+        # # # Clean up
+        # cv2.destroyAllWindows()
         for i in classes[0]:
             if(printcount == count):
                 break
@@ -479,4 +480,3 @@ def gvs2(PATH_TO_IMAGE):
         return 1
     else:
         return PATH_TO_IMAGE
-

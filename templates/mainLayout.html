@@ -43,3 +43,48 @@
 <script type="text/javascript" src="{{ url_for('static',filename='js/gvsScript.js') }}"></script>
 </body>
 </html>
+
+<!-- # background process happening without any refreshing
+@app.route('/camscan')
+def CamScan():
+    from os import listdir
+    CWD_PATH = os.getcwd()
+    img_dir_path=os.path.join(CWD_PATH,"current_cart")
+
+    #empty the contents in the last bill
+    open('product_list.csv', 'w').close()
+
+    image_list=listdir(img_dir_path)
+    load_images=[]
+    for image in image_list:
+        global cnt,detected, not_detected
+        if cnt==0:
+            PATH_TO_IMAGE=os.path.join(img_dir_path,image)
+
+            detected=gvs(PATH_TO_IMAGE)
+            cnt+=1
+            if detected != 1:
+                detected=image
+                not_detected.append(image)
+                # flash("Could not detect image: "
+                #   +str(detected)
+                #   +" click "
+                #   +Markup(r"<a href='/show-bill'>here</a>")
+                #   +" to generate bill without it or generate new bill with new images")
+                # return redirect('/generate-bill-page')
+        else:
+            PATH_TO_IMAGE=os.path.join(img_dir_path,image)
+            detected=gvs2(PATH_TO_IMAGE)
+            if detected!=1:
+                detected=image
+                not_detected.append(image)
+
+                # flash("Could not detect image: "
+                #   +str(detected)
+                #   +" click "
+                #   +Markup(r"<a href='/show-bill'>here</a>")
+                #   +" to generate bill without it or generate new bill with new images")
+                # return redirect('/generate-bill-page')
+
+    return redirect('/show-bill')
+ -->
