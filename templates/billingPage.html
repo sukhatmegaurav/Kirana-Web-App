@@ -8,16 +8,17 @@
 	<br><br><br><br>
 	{% extends "mainLayout.html" %}
 	{% block content %}
-	<article>
+	<div id="loading" style="display:none; width: 500px; margin: 100px 500px 75px;"><img src="static/css/images/loading.gif" alt="Please wait" />
+	<h3>Your bill is processing!</h3>
+	</div>
+	<article id="unload">
 		<form method="post" enctype="multipart/form-data" id="uProductImg">
-			<button type="submit" class='btn btn-lg btn-info' >Generate Bill</button>
-			
+			<button type="submit" class='btn btn-lg btn-info' onclick="$('#loading').show(); $('#unload').hide();" >Generate Bill</button>
 			<br><br><br>
 		    <label for="files">Select product images: </label>
 		    <input id="files" type="file" multiple="multiple" accept="jpg*;capture=camera" name="file[]"/>
 		    <button type="button" id="clear">Clear selection</button>
 		</form>
-	   
 	    <hr>
         
         <output id="result" />
