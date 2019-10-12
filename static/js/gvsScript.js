@@ -77,3 +77,4 @@ $(document).ready(function(){
     //Check File API support in billingPage
 
 });
+

@@ -9,6 +9,7 @@ app = Flask(__name__)
 api = Api(app)
 cnt=0
 detected=1
+visitors=0
 
 # Uploads settings
 app.config['UPLOADED_PHOTOS_DEST'] = os.getcwd() + '/current_cart'
@@ -22,11 +23,13 @@ def favicon():
 
 @app.route('/')
 def home():
-	return redirect('generate-bill-page')
+	return render_template('InventoryPage.html',visitors=visitors)
 
 # background process happening without any refreshing
 @app.route('/camscan')
 def CamScan():
+	global visitors
+	visitors+=1
 	from os import listdir
 	CWD_PATH = os.getcwd()
 	img_dir_path=os.path.join(CWD_PATH,"current_cart")
@@ -134,11 +137,6 @@ def BillingPage():
 	else:
 		return render_template('billingPage.html')
 
-
-@app.route('/error')
-def Error():
-	global detected
-	return render_template('errorPage.html', errorImage=detected)
 
 
 

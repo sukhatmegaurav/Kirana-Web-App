@@ -3,12 +3,15 @@
 <!DOCTYPE html>
 <head>
 	<title>Kirana Store</title>
-	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js')}}"></script>
-	<link rel="stylesheet" href="{{ url_for('static',filename='css/mainLayout.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js')}}"></script>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/ionicons.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/AdminLTE.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/_all-skins.min.css')}}">
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/mainLayout.css') }}">
 </head>
-<body>
-<header>
+<body class="skin-blue">
+<div class="">
   <div class="container">
     <nav class="navbar navbar-expand bg-info navbar-dark fixed-top">
             <div class="container-fluid">
@@ -19,72 +22,30 @@
 
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ url_for('BillingPage') }}">Generate New Bill</a>
+                        <a class="btn btn-danger nav-link active" href="{{ url_for('BillingPage') }}">Generate New Bill</a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link active" href="{{ url_for('ShowBill') }}">ShowBill</a>
-                    </li> -->
                 </ul>
             </div>
         </nav>
   </div>
-</header>
-<div class="main">
+
+</div>
     {% for message in get_flashed_messages() %}
     <div class="alert alert-warning">
         <button type="button" class="close" data-dismiss="alert">X</button>
         {{ message }}
     </div>
     {% endfor %}
+    <br><br><br>
     {% block content %}
     {% endblock %}
-</div>
 <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/dashboard2.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/adminlte.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/Chart.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static',filename='js/popper.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static',filename='js/gvsScript.js') }}"></script>
+
 </body>
 </html>
 
-<!-- # background process happening without any refreshing
-@app.route('/camscan')
-def CamScan():
-    from os import listdir
-    CWD_PATH = os.getcwd()
-    img_dir_path=os.path.join(CWD_PATH,"current_cart")
-
-    #empty the contents in the last bill
-    open('product_list.csv', 'w').close()
-
-    image_list=listdir(img_dir_path)
-    load_images=[]
-    for image in image_list:
-        global cnt,detected, not_detected
-        if cnt==0:
-            PATH_TO_IMAGE=os.path.join(img_dir_path,image)
-
-            detected=gvs(PATH_TO_IMAGE)
-            cnt+=1
-            if detected != 1:
-                detected=image
-                not_detected.append(image)
-                # flash("Could not detect image: "
-                #   +str(detected)
-                #   +" click "
-                #   +Markup(r"<a href='/show-bill'>here</a>")
-                #   +" to generate bill without it or generate new bill with new images")
-                # return redirect('/generate-bill-page')
-        else:
-            PATH_TO_IMAGE=os.path.join(img_dir_path,image)
-            detected=gvs2(PATH_TO_IMAGE)
-            if detected!=1:
-                detected=image
-                not_detected.append(image)
-
-                # flash("Could not detect image: "
-                #   +str(detected)
-                #   +" click "
-                #   +Markup(r"<a href='/show-bill'>here</a>")
-                #   +" to generate bill without it or generate new bill with new images")
-                # return redirect('/generate-bill-page')
-
-    return redirect('/show-bill')
- -->
