@@ -314,6 +314,16 @@ product_details={
 }
 }
 
+# Import packages
+import os
+import cv2
+import numpy as np
+import sys
+import tensorflow as tf
+
+# Import utilites
+from utils import label_map_util
+from utils import visualization_utils as vis_util
 
 detection_graph=''
 label_map=''
@@ -321,41 +331,23 @@ categories=''
 category_index=''
 sess=''
 
-def gvs(PATH_TO_IMAGE):
+def load_tensorflow_to_memory(PATH_TO_IMAGE):
     ######## Image Object Detection Using Tensorflow-trained Classifier #########
     #
-    # Author: Evan Juras
-    # Date: 1/15/18
+    # Author: Team StrawHats
+    # Date: 5/10/19
     # Description:
     # This program uses a TensorFlow-trained classifier to perform object detection.
     # It loads the classifier uses it to perform object detection on an image.
-    # It draws boxes and scores around the objects of interest in the image.
 
     ## Some of the code is copied from Google's example at
     ## https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb
 
-    ## and some is copied from Dat Tran's example at
-    ## https://github.com/datitran/object_detector_app/blob/master/object_detection_app.py
+    ## but we changed it to make it more understandable, as per our use case.
 
-    ## but I changed it to make it more understandable to me.
-
-    # Import packages
-    import os
-    import cv2
-    import numpy as np
-    import tensorflow as tf
-    import sys
-
-    # This is needed since the notebook is stored in the object_detection folder.
-    sys.path.append("..")
-
-    # Import utilites
-    from utils import label_map_util
-    from utils import visualization_utils as vis_util
 
     # Name of the directory containing the object detection module we're using
     MODEL_NAME = 'inference_graph'
-    # IMAGE_NAME = 'test12.jpg'
 
     # Grab path to current working directory
     CWD_PATH = os.getcwd()
@@ -397,17 +389,9 @@ def gvs(PATH_TO_IMAGE):
 
         global sess
         sess = tf.Session(graph=detection_graph)
-    return gvs2(PATH_TO_IMAGE)
+    return perform_product_detection(PATH_TO_IMAGE)
 
-def gvs2(PATH_TO_IMAGE):
-    # Import packages
-    import os
-    import cv2
-    import numpy as np
-    import sys
-    # Import utilites
-    from utils import label_map_util
-    from utils import visualization_utils as vis_util
+def perform_product_detection(PATH_TO_IMAGE):
 
     # Define input and output tensors (i.e. data) for the object detection classifier
 

@@ -10,6 +10,8 @@ api = Api(app)
 cnt=0
 detected=1
 visitors=0
+customer_name=''
+product_cnt=0
 
 # Uploads settings
 app.config['UPLOADED_PHOTOS_DEST'] = os.getcwd() + '/current_cart'
@@ -22,13 +24,16 @@ def favicon():
 	return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/')
-def home():
-	return render_template('InventoryPage.html',visitors=visitors)
+def Inventory():
+	global product_cnt
+	return render_template('InventoryPage.html',
+		visitors=visitors,
+		product_cnt=product_cnt)
 
 # background process happening without any refreshing
 @app.route('/camscan')
 def CamScan():
-	global visitors
+	global visitors,product_cnt
 	visitors+=1
 	from os import listdir
 	CWD_PATH = os.getcwd()
@@ -44,15 +49,17 @@ def CamScan():
 		if cnt==0:
 			PATH_TO_IMAGE=os.path.join(img_dir_path,image)
 
-			detected=gvs(PATH_TO_IMAGE)
+			detected=load_tensorflow_to_memory(PATH_TO_IMAGE)
 			cnt+=1
 			if detected != 1:
+				product_cnt+=1
 				detected=image
 				not_detected.append(image)
 		else:
 			PATH_TO_IMAGE=os.path.join(img_dir_path,image)
-			detected=gvs2(PATH_TO_IMAGE)
+			detected=perform_product_detection(PATH_TO_IMAGE)
 			if detected!=1:
+				product_cnt+=1
 				detected=image
 				not_detected.append(image)
 	if len(not_detected)!=0:
@@ -62,7 +69,7 @@ def CamScan():
 
 		flash("Could not detect image: "
 		  +not_detected_products
-		  +Markup(r"<a href='/show-bill'>click here</a>")
+		  +Markup(r"<a href='/show-bill'> click here</a>")
 		  +" to generate bill without it or generate new bill with new images")
 		return redirect('/generate-bill-page')
 
@@ -81,11 +88,7 @@ def ShowBill():
 		for line in csv_reader:
 			redundant_list.append(int(line[0]))
 
-	# print("redundant_list",redundant_list)
-
 	set_list=list(set(redundant_list))
-
-	# print("set_list",set_list)
 
 	for i in range(len(set_list)):
 		items_freq[set_list[i]]=redundant_list.count(set_list[i])
@@ -107,11 +110,13 @@ def ShowBill():
 
 	invoice_id=random.randint(10000, 99999)
 	timestamp=datetime.now().strftime("%A, %d. %B %Y %I:%M%p")
+	global customer_name
 	return render_template('showBillPage.html',
 		cart=cart,
 		costs=costs,
 		timestamp=timestamp,
-		invoice_id=invoice_id)
+		invoice_id=invoice_id,
+		customer_name=customer_name)
 
 
 @app.route('/generate-bill-page', methods=['GET','POST'])
@@ -124,7 +129,10 @@ def BillingPage():
 		for f in files:
 			os.remove(f)
 		#empty current_cart folder
+
 		file_obj = request.files.getlist('file[]')
+		global customer_name
+		customer_name=request.form['customer_name']
 		for f in file_obj:
 			# file = request.files.get(f)
 			file = f
@@ -143,4 +151,4 @@ def BillingPage():
 if __name__ == '__main__':
 	app.secret_key = 'super secret key'
 	app.config['SESSION_TYPE'] = 'filesystem'
-	app.run(port=5002,debug=True)
+	app.run(port=5002,debug=True,host='0.0.0.0')

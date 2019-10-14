@@ -9,8 +9,9 @@
 	<div id="invoice">
         <div class="toolbar hidden-print">
             <div class="text-right">
-                <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
-                <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
+                <button id="printInvoice" class="btn btn-danger">
+                    <i class="fa fa-print"></i> Print</button>
+                <button class="btn btn-danger"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
             </div>
             <hr>
         </div>
@@ -40,7 +41,7 @@
                     <div class="row contacts">
                         <div class="col invoice-to">
                             <div class="text-gray-light">INVOICE TO:</div>
-                            <h2 class="to">Guest</h2>
+                            <h2 class="to">{{ customer_name }}</h2>
                         </div>
                         <div class="col invoice-details">
                             <h1 class="invoice-id">INVOICE {{ invoice_id }}</h1>

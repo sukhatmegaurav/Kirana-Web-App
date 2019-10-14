@@ -5,19 +5,20 @@
 	<link rel="stylesheet" href="{{ url_for('static',filename='css/billingPage.css') }}">
 </head>
 <body>
-	<br><br><br><br>
+	<br><br><br>
 	{% extends "mainLayout.html" %}
 	{% block content %}
-	<div id="loading" style="display:none; width: 500px; margin: 100px 500px 75px;"><img src="static/css/images/giphy.gif" alt="Please wait" />
+	<div id="loading" style="display:none; width: 100%; margin: 0px 70px 550px 500px;"><img height="300" width="300" src="static/css/images/giphy.gif" alt="Please wait" />
 	<h3>Your bill is processing!</h3>
 	</div>
 	<article id="unload">
 		<form method="post" enctype="multipart/form-data" id="uProductImg">
-			<button type="submit" class='btn btn-lg btn-info' onclick="$('#loading').show(); $('#unload').hide();" >Generate Bill</button>
+			<input type="text" name="customer_name" placeholder="Customer's Name here" value="guest">&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="submit" class='btn btn-lg btn-danger' onclick="$('#loading').show(); $('#unload').hide();" >Generate Bill</button>
 			<br><br><br>
 		    <label for="files">Select product images: </label>
-		    <input id="files" type="file" multiple="multiple" accept="jpg*;capture=camera" name="file[]"/>
-		    <button type="button" id="clear">Clear selection</button>
+		    <input id="files" class="btn btn-danger" type="file" multiple="multiple" accept="jpg*;capture=camera" name="file[]"/>
+		    <button type="button" class="btn btn-danger" id="clear">Clear selection</button>
 		</form>
 	    <hr>
 
