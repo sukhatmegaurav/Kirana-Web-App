@@ -16,6 +16,8 @@ $(document).ready(function(){
 	        function Popup(data)
 	        {
 	            window.print();
+                // window.location.href='/';
+                setTimeout('toInventory','3000');
 	            return true;
 	        }
     });
@@ -78,3 +80,7 @@ $(document).ready(function(){
 
 });
 
+function toInventory() {
+                window.location.href='/';
+                return true;
+            }

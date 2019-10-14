@@ -1,5 +1,5 @@
 .main {
-    margin-left: 10px; /* Same as the width of the sidenav */
+    margin-left: 30px; /* Same as the width of the sidenav */
 }
 #invoice{
     padding: 30px;
@@ -170,6 +170,7 @@
 body
 {
     counter-reset: Serial;           /* Set the Serial counter to 0 */
+    background-color: #E9EBEE;
 }
 
 table

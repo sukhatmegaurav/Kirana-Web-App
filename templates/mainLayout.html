@@ -11,9 +11,8 @@
 	<link rel="stylesheet" href="{{ url_for('static',filename='css/mainLayout.css') }}">
 </head>
 <body class="skin-blue">
-<div class="">
   <div class="container">
-    <nav class="navbar navbar-expand bg-info navbar-dark fixed-top">
+    <nav class="navbar navbar-expand bg-danger fixed-top">
             <div class="container-fluid">
                 <div class="nav-brand" style="align-items: center;justify-content: center;display: flex;">
                     <img src="/static/css/images/kiranastore.jpg" width="40" height="40" class="d-inline-block align-top rounded" alt="">
@@ -22,23 +21,28 @@
 
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="btn btn-danger nav-link active" href="{{ url_for('BillingPage') }}">Generate New Bill</a>
+                        <a class="btn btn-danger nav-link " href="{{ url_for('BillingPage') }}">Generate New Bill</a>
+                    </li>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <li class="nav-item">
+                        <a class="btn btn-danger nav-link " href="{{ url_for('Inventory') }}">Store Inventory</a>
                     </li>
                 </ul>
             </div>
         </nav>
   </div>
 
-</div>
     {% for message in get_flashed_messages() %}
-    <div class="alert alert-warning">
+    <div class="alert alert-danger">
         <button type="button" class="close" data-dismiss="alert">X</button>
         {{ message }}
     </div>
     {% endfor %}
-    <br><br><br>
+<div class="main">
+    <br>
     {% block content %}
     {% endblock %}
+</div>
 <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="{{ url_for('static',filename='js/dashboard2.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static',filename='js/adminlte.min.js') }}"></script>
