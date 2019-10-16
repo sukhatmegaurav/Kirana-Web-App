@@ -8,10 +8,11 @@ from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_cl
 app = Flask(__name__)
 api = Api(app)
 cnt=0
-detected=1
+detected=[1,]
 visitors=0
 customer_name=''
 product_cnt=0
+sales=0
 
 # Uploads settings
 app.config['UPLOADED_PHOTOS_DEST'] = os.getcwd() + '/current_cart'
@@ -25,16 +26,15 @@ def favicon():
 
 @app.route('/')
 def Inventory():
-	global product_cnt
+	global sales,visitors
 	return render_template('InventoryPage.html',
 		visitors=visitors,
-		product_cnt=product_cnt)
+		sales=sales)
 
 # background process happening without any refreshing
 @app.route('/camscan')
 def CamScan():
-	global visitors,product_cnt
-	visitors+=1
+	global product_cnt
 	from os import listdir
 	CWD_PATH = os.getcwd()
 	img_dir_path=os.path.join(CWD_PATH,"current_cart")
@@ -51,17 +51,21 @@ def CamScan():
 
 			detected=load_tensorflow_to_memory(PATH_TO_IMAGE)
 			cnt+=1
-			if detected != 1:
-				product_cnt+=1
-				detected=image
+			if detected[0] != 1:
+				detected[0]=image
 				not_detected.append(image)
+			else:
+				product_cnt+=detected[1]
+
 		else:
 			PATH_TO_IMAGE=os.path.join(img_dir_path,image)
 			detected=perform_product_detection(PATH_TO_IMAGE)
-			if detected!=1:
-				product_cnt+=1
-				detected=image
+			if detected[0]!=1:
+				detected[0]=image
 				not_detected.append(image)
+			else:
+				product_cnt+=detected[1]
+
 	if len(not_detected)!=0:
 		not_detected_products=''
 		for product in not_detected:
@@ -83,6 +87,8 @@ def ShowBill():
 	import random
 	items_freq={}
 	redundant_list=[]
+	global visitors
+	visitors+=1
 	with open("product_list.csv",'r') as cart:
 		csv_reader=csv.reader(cart)
 		for line in csv_reader:
@@ -145,6 +151,12 @@ def BillingPage():
 	else:
 		return render_template('billingPage.html')
 
+
+@app.route('/update-sales')
+def UpdateSales():
+	global product_cnt,sales
+	sales=product_cnt
+	return redirect('/')
 
 
 
