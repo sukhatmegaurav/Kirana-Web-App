@@ -17,7 +17,7 @@ I also made a YouTube video that walks through this tutorial. Any discrepancies 
 
 **If there are differences between this written tutorial and the video, follow the written tutorial!**
 
-[![Link to my YouTube video!](https://raw.githubusercontent.com/sukhatmegaurav/Kirana-Web-App/doc/demo.png)](https://www.youtube.com/watch?v=xyTsDTEi42E)
+[![Link to my YouTube video!](https://raw.githubusercontent.com/ayushbathrey/Kirana-Web-App/doc/demo.png)](https://www.youtube.com/watch?v=xyTsDTEi42E)
 
 The repository provides all the files needed to test the daily life product detector that can accurately detect Coke can/bottle, Colgate, Colagate Plax, Lays (All sizes), Nescafe, Gooday Biscuit,  Maggi and toothbrush.  It also has Python scripts to test your classifier out on an image, video, or webcam feed.
 
