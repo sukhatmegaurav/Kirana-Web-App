@@ -110,7 +110,7 @@ To test your object detector, just open command prompt and type
 Now you will see a new console have started in which you can check logs.
 
 <p align="center">
-  <img src="doc/inventory.jpg">
+  <img src="doc/inventory.png">
 </p>
 
 *Steps to run the project*
@@ -120,3 +120,13 @@ Step.3 After all images are selected , just generate bill button.
 Step.4 Now you will see a processing screen , after which you will we routed to Bill page.
 Step.5 Now after checking your products , you need to press print button to complete the order.
 Step.6 You redirected back to inventory page where you will updated sales and other field
+
+*Bill*
+<p align="center">
+  <img src="doc/bill1.png">
+</p>
+ 
+ Continued!
+<p align="center">
+  <img src="doc/bill2.png">
+</p>
