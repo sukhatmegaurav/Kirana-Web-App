@@ -1,23 +1,25 @@
 # How To Test Object Detection Classifier for Multiple Objects Using TensorFlow (GPU) on Windows 10
 
 ## Brief Summary
-*Last updated: 6/22/2019 with TensorFlow v1.14*
+*Last updated: 10/18/2019 with TensorFlow v1.14*
 
-What this model can predict/detect?
-It can check upto 46 different items , which may have brand but different size.
+*What this model can predict/detect ?*
+<p>It can check upto 46 different items , which may have brand but different size.
 Brands it can detect: 1. Coke Glass bottle , Can , Plastic bottle 300ml to 2L.
 					  2. Colgate Small , Medium , Size , Plax
 					  3. Nescafe Cappuccino , Gold , Classic availabe in small and medium size.
 					  4. Toothbush.
 					  5. Gooday biscuit small , medium , large.
 					  6. Lays small , medium , large/family.
-					  7. Brittania Toast small , medium, large.
+					  7. Brittania Toast small , medium, large.<p>
 
 I also made a YouTube video that walks through this tutorial. Any discrepancies between the video and this written tutorial are due to updates required for using newer versions of TensorFlow. 
 
 **If there are differences between this written tutorial and the video, follow the written tutorial!**
 
-[![Link to my YouTube video!](https://github.com/ayushbathrey/Kirana-Web-App/blob/master/doc/inventory.png)](https://www.youtu.be/xyTsDTEi42E)
+**Click on image below for Youtube tutorial**
+
+[![Link to my YouTube video!](https://github.com/ayushbathrey/Kirana-Web-App/blob/master/doc/y-inventory.png)](https://www.youtu.be/xyTsDTEi42E)
 
 The repository provides all the files needed to test the daily life product detector that can accurately detect Coke can/bottle, Colgate, Colagate Plax, Lays (All sizes), Nescafe, Gooday Biscuit,  Maggi and toothbrush.  It also has Python scripts to test your classifier out on an image, video, or webcam feed.
 
