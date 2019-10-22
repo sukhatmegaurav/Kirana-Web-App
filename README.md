@@ -120,15 +120,18 @@ Now you will see a new console have started in which you can check logs.
 </p>
 
 *Steps to run the project*
-Step.1 Now go to Generate bill button and click on it.Then you will we routed to another route.
-Step.2 Now select images to perform detection.
-Step.3 After all images are selected , just generate bill button.
-Step.4 Now you will see a processing screen , after which you will we routed to Bill page.
+<ul>
+	
+<li>Step.1 Now go to Generate bill button and click on it.Then you will we routed to another route.</li><
+<li> Step.2 Now select images to perform detection.</li>
+<li>Step.3 After all images are selected , just generate bill button.</li>
+<li>Step.4 Now you will see a processing screen , after which you will we routed to Bill page.</li>
 <p align="center">
   <img src="doc/processing.png">
 </p>
-Step.5 Now after checking your products , you need to press print button to complete the order.
-Step.6 You redirected back to inventory page where you will updated sales and other field
+<li>Step.5 Now after checking your products , you need to press print button to complete the order.</li>
+<li>Step.6 You redirected back to inventory page where you will updated sales and other field</li>
+</ul>
 
 *Bill*
 <p align="center">
