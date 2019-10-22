@@ -1,9 +1,9 @@
 # How To Test Object Detection Classifier for Multiple Objects Using TensorFlow (GPU) on Windows 10
 
 ## Brief Summary
-*Last updated: 10/18/2019 with TensorFlow v1.14*
+**Last updated: 10/18/2019 with TensorFlow v1.14**
 
-*What this model can predict/detect ?*
+**What this model can predict/detect ?**
 <p> It can check upto 46 different items , which may have brand but different size.
 	<h2>Brands it can detect:</h2>
 	<ul>
