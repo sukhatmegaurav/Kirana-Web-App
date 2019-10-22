@@ -19,12 +19,16 @@ I also made a YouTube video that walks through this tutorial. Any discrepancies 
 
 **Click on image below for Youtube tutorial**
 
-[![Link to my YouTube video!](https://github.com/ayushbathrey/Kirana-Web-App/blob/master/doc/y-inventory.png)](https://www.youtu.be/xyTsDTEi42E)
+[![Link to my YouTube video!](https://github.com/ayushbathrey/Kirana-Web-App/blob/master/doc/demo.gif)](https://www.youtube.com/embed/xyTsDTEi42E)
 
 The repository provides all the files needed to test the daily life product detector that can accurately detect Coke can/bottle, Colgate, Colagate Plax, Lays (All sizes), Nescafe, Gooday Biscuit,  Maggi and toothbrush.  It also has Python scripts to test your classifier out on an image, video, or webcam feed.
 
 <p align="center">
   <img src="doc/colgate.png">
+</p>
+
+<p align="center">
+  <img src="doc/demo.png">
 </p>
 
 ## Introduction
@@ -120,6 +124,9 @@ Step.1 Now go to Generate bill button and click on it.Then you will we routed to
 Step.2 Now select images to perform detection.
 Step.3 After all images are selected , just generate bill button.
 Step.4 Now you will see a processing screen , after which you will we routed to Bill page.
+<p align="center">
+  <img src="doc/processing.png">
+</p>
 Step.5 Now after checking your products , you need to press print button to complete the order.
 Step.6 You redirected back to inventory page where you will updated sales and other field
 
