@@ -5,7 +5,7 @@
 
 *What this model can predict/detect ?*
 <p> It can check upto 46 different items , which may have brand but different size.
-	Brands it can detect:
+	<h2>Brands it can detect:</h2>
 	<ul>
 	<li> 1. Coke Glass bottle , Can , Plastic bottle 300ml to 2L.</li>
 	<li> 2. Colgate Small , Medium , Size , Plax.</li>
