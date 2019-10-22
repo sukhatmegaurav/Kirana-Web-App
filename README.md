@@ -15,8 +15,8 @@
 	<li> 6. Lays small , medium , large/family.</li>
 	<li> 7. Brittania Toast small , medium, large.</li>
 	<ul>
+</p>
 I also made a YouTube video that walks through this tutorial. Any discrepancies between the video and this written tutorial are due to updates required for using newer versions of TensorFlow. 
-<p>
 
 **If there are differences between this written tutorial and the video, follow the written tutorial!**
 
