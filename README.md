@@ -21,8 +21,6 @@ I also made a YouTube video that walks through this tutorial. Any discrepancies 
 
 [![Link to my YouTube video!](https://github.com/ayushbathrey/Kirana-Web-App/blob/master/doc/demo.gif)](https://www.youtube.com/embed/xyTsDTEi42E)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xyTsDTEi42E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 The repository provides all the files needed to test the daily life product detector that can accurately detect Coke can/bottle, Colgate, Colagate Plax, Lays (All sizes), Nescafe, Gooday Biscuit,  Maggi and toothbrush.  It also has Python scripts to test your classifier out on an image, video, or webcam feed.
 
 <p align="center">
@@ -131,6 +129,16 @@ Step.4 Now you will see a processing screen , after which you will we routed to 
 </p>
 Step.5 Now after checking your products , you need to press print button to complete the order.
 Step.6 You redirected back to inventory page where you will updated sales and other field
+
+*Bill*
+<p align="center">
+  <img src="doc/bill1.png">
+</p>
+ 
+ Continued
+<p align="center">
+  <img src="doc/bill2.png">
+</p> redirected back to inventory page where you will updated sales and other field
 
 *Bill*
 <p align="center">
