@@ -21,11 +21,11 @@
 
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="btn btn-danger nav-link " href="{{ url_for('BillingPage') }}">Generate New Bill</a>
+                        <a class="btn btn-danger nav-link" href="{{ url_for('BillingPage') }}">Generate New Bill</a>
                     </li>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <li class="nav-item">
-                        <a class="btn btn-danger nav-link " href="{{ url_for('Inventory') }}">Store Inventory</a>
+                        <a class="btn btn-danger nav-link " onclick="$('#loading').show(); $('#unload').hide();" href="{{ url_for('Inventory') }}">Store Inventory</a>
                     </li>
                 </ul>
             </div>
