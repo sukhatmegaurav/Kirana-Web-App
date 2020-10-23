@@ -151,6 +151,12 @@ def BillingPage():
 	else:
 		return render_template('billingPage.html')
 
+@app.route('/profile')
+def profile():
+	if request.method =="POST":
+		return render_template('profile.html')
+	else:
+		return redirect('/')
 
 @app.route('/update-sales')
 def UpdateSales():
