@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Statement</h1>
+<a  class="printPage btn-danger" href="#">Print</a>
+<h2 class="word">
+				<form action="{{ url_for('login') }}" method="post">
+				<div class="msg">{{ msg }}</div> 
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>TRID</th>
+								<th>SSN</th>
+								<th>CUST_ID</th>
+								<th>TYPE</th>
+								<th>TRANSACTION DATE</th>
+								<th>BALANCE</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for i in statements %}
+							<tr>
+								<td class="btn-danger">{{i.trid}}</td>
+								<td class="btn-default">{{i.ssn}}</td>
+								<td class="btn-info">{{i.cust_id}}</td>
+								<td class="btn-link">{{i.type}}</td>
+								<td class="btn-link">{{i.trdate}}</td>
+								<td class="btn-info">{{i.balance}}</td>
+							</tr>
+							{%endfor%}
+						</tbody>
+					</table>
+				</form> 
+			</h2>
+<script>
+	$('a.printPage').click(function(){
+           window.print();
+           return false;
+});
+</script>
+{% endblock %}

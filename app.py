@@ -164,7 +164,19 @@ def UpdateSales():
 	sales=product_cnt
 	return redirect('/')
 
-
+@app.route('/statement', methods=["GET", "POST"])
+def statement():
+    if request.method == 'POST':
+        return render_template("statement.html")
+    else:
+        ssn = session['accssn']
+        acc_id = session['accssn']
+        curl = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        curl.execute("SELECT * FROM transactions WHERE ssn=%s ORDER BY trdate DESC LIMIT 10",(ssn,))
+        result = curl.fetchall()
+        # print(result)
+        curl.close()
+        return render_template("statement.html",statements=result)
 
 if __name__ == '__main__':
 	app.secret_key = 'super secret key'
