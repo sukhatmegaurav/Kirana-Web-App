@@ -1,4 +1,6 @@
-# How To Test Object Detection Classifier for Multiple Objects Using TensorFlow (GPU) on Windows 10
+# Kirana - A ML based bill generation system.
+
+## How To Test Object Detection Classifier for Multiple Objects Using TensorFlow (GPU) on Windows 10
 
 ## Brief Summary
 **Last updated: 10/18/2019 with TensorFlow v1.14**
