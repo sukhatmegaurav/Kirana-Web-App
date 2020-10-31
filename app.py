@@ -158,11 +158,22 @@ def profile():
 	else:
 		return redirect('/')
 
-@app.route('/update-sales')
+@app.route('/update-sales', methods=['GET','POST'])
 def UpdateSales():
 	global product_cnt,sales
 	sales=product_cnt
-	return redirect('/')
+	if request.method == "POST":
+		cust_id=request.form['cust_id']
+		customer_email=request.form['customer_email']
+		customer_name=request.form['customer_name']
+		pendingamnt=request.form['pendingamnt']
+		cur = mysql.connection.cursor()
+		cur.execute("INSERT INTO sales (cust_id , cust_email, cust_amount, pendingamnt) VALUES (%s,%s,%s,%s)",(invoice_id,customer_name,customer_email,contact_no,cart,costs['cost_w_gst'],))
+		mysql.connection.commit()
+		print('Sales Updated')
+		return render_template('/')
+	else:
+		return redirect('/')
 
 @app.route('/statement', methods=["GET", "POST"])
 def statement():
